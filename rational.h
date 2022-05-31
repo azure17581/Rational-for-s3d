@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Rational {
 	int32 num;
@@ -7,10 +7,10 @@ class Rational {
 public:
 	void setVal(int32 n, int32 d);
 
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Rational();
 	Rational(int32 n, int32 d);
-	template <std::integral T> explicit Rational(T val);
+	template <std::integral T>	explicit Rational(T val);
 
 	//getter / setter
 	int32 gnum() const;
@@ -18,7 +18,7 @@ public:
 	void snum(int32 n);
 	void sden(int32 d);
 
-	//‰‰Zq
+	//æ¼”ç®—å­
 	//Rat .= Rat
 	Rational& operator+=(const Rational& r);
 	Rational& operator-=(const Rational& r);
@@ -31,13 +31,13 @@ public:
 	template <std::integral T> Rational& operator*=(const T& r);
 	template <std::integral T> Rational& operator/=(const T& r);
 	
-	//Œ^•ÏŠ·
+	//å‹å¤‰æ›
 	template <std::floating_point T> explicit operator T() const;
 	explicit operator int32() const;
 	explicit operator String() const;
 };
 
-//+=, -=, *=, /= ‚Ì¶•Ó‚ª Rational ‚Ì‚Æ‚«‚É‰E•Ó‚É—ˆ‚é‚±‚Æ‚ª‚Å‚«‚éŒ^
+//+=, -=, *=, /= ã®å·¦è¾ºãŒ Rational ã®ã¨ãã«å³è¾ºã«æ¥ã‚‹ã“ã¨ãŒã§ãã‚‹å‹
 template <typename T>
 concept Rat_c = requires (Rational a, T b) {
 	a += b;
@@ -46,7 +46,7 @@ concept Rat_c = requires (Rational a, T b) {
 	a /= b;
 };
 
-//Zp‰‰Zq
+//ç®—è¡“æ¼”ç®—å­
 //--- Rat . Rat_c
 template<Rat_c T> Rational operator+(const Rational& l, const T& r);
 template<Rat_c T> Rational operator-(const Rational& l, const T& r);
@@ -58,7 +58,7 @@ template<std::integral T> Rational operator-(const T& l, const Rational& r);
 template<std::integral T> Rational operator*(const T& l, const Rational& r);
 template<std::integral T> Rational operator/(const T& l, const Rational& r);
 
-//”äŠr‰‰Zq
+//æ¯”è¼ƒæ¼”ç®—å­
 //--- Rat . Rat_c
 template<Rat_c T> bool operator< (const Rational& l, const T& r);
 template<Rat_c T> bool operator> (const Rational& l, const T& r);
@@ -85,15 +85,15 @@ template<std::floating_point T> double operator-(const T& l, const Rational& r);
 template<std::floating_point T> double operator*(const T& l, const Rational& r);
 template<std::floating_point T> double operator/(const T& l, const Rational& r);
 
-//Rational ‚Ì•¶š—ñ‰»‚ğ‰Â”\‚É‚·‚é‚½‚ß‚ÌƒI[ƒo[ƒ[ƒh
-//‚±‚ê‚É‚æ‚Á‚Ä Format() ‚â Print ‚É“n‚¹‚é‚æ‚¤‚É‚È‚é
+//Rational ã®æ–‡å­—åˆ—åŒ–ã‚’å¯èƒ½ã«ã™ã‚‹ãŸã‚ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
+//ã“ã‚Œã«ã‚ˆã£ã¦ Format() ã‚„ Print ã«æ¸¡ã›ã‚‹ã‚ˆã†ã«ãªã‚‹
 namespace s3d {
 	void Formatter(FormatData& formatData, const Rational& r);
 }
 
 //==============================================//
 //                                              //
-//                     À‘•                     //
+//                     å®Ÿè£…                     //
 //                                              //
 //==============================================//
 
@@ -115,7 +115,7 @@ void Rational::setVal(int32 n, int32 d) {
 	this->den = d / g;
 }
 
-//====================  ƒRƒ“ƒXƒgƒ‰ƒNƒ^  ====================//
+//====================  ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿  ====================//
 
 Rational::Rational() {
 	this->num = 0;
@@ -150,7 +150,7 @@ void Rational::sden(int32 d) {
 	setVal(this->num, d);
 }
 
-//====================  ‰‰Zq  ====================//
+//====================  æ¼”ç®—å­  ====================//
 //=== Rat .= Rat
 
 Rational& Rational::operator+=(const Rational& r) {
@@ -200,13 +200,13 @@ template<std::integral T> Rational& Rational::operator/=(const T& r) {
 	return *this;
 }
 
-//====================  Œ^•ÏŠ·  ====================//
+//====================  å‹å¤‰æ›  ====================//
 
 Rational::operator String() const { return Format(this->num, U'/', this->den); }
 template<std::floating_point T> inline Rational::operator T() const { return ((T)this->num / (T)this->den); }
 Rational::operator int32() const { return this->num / this->den; }
 
-//====================  Zp‰‰Zq  ====================//
+//====================  ç®—è¡“æ¼”ç®—å­  ====================//
 //=== Rat . Rat_c
 template<Rat_c T> inline Rational operator+(const Rational& l, const T& r) { return Rational(l) += r; }
 template<Rat_c T> inline Rational operator-(const Rational& l, const T& r) { return Rational(l) -= r; }
@@ -218,7 +218,7 @@ template<std::integral T> inline Rational operator-(const T& l, const Rational& 
 template<std::integral T> inline Rational operator*(const T& l, const Rational& r) { return Rational(l) *= r; }
 template<std::integral T> inline Rational operator/(const T& l, const Rational& r) { return Rational(l) /= r; }
 
-//====================  ”äŠr‰‰Zq  ====================//
+//====================  æ¯”è¼ƒæ¼”ç®—å­  ====================//
 //=== Rat . Rat_c
 template<Rat_c T> inline bool operator< (const Rational& l, const T& r) { return ((l - r).gnum() < 0); }
 template<Rat_c T> inline bool operator> (const Rational& l, const T& r) { return r < l; }
@@ -230,11 +230,11 @@ template<Rat_c T> inline bool operator!=(const Rational& l, const T& r) { return
 template<std::integral T> inline bool operator< (const T& l, const Rational& r) { return Rational(l) < r; }
 template<std::integral T> inline bool operator> (const T& l, const Rational& r) { return Rational(l) > r; }
 template<std::integral T> inline bool operator<=(const T& l, const Rational& r) { return Rational(l) <= r; }
-template<std::integral T> inline bool operator>=(const T& l, const Rational& r) { return Rational(l) <= r; }
+template<std::integral T> inline bool operator>=(const T& l, const Rational& r) { return Rational(l) >= r; }
 template<std::integral T> inline bool operator==(const T& l, const Rational& r) { return Rational(l) == r; }
 template<std::integral T> inline bool operator!=(const T& l, const Rational& r) { return Rational(l) != r; }
 
-//====================  Zp‰‰Zq  ====================//
+//====================  ç®—è¡“æ¼”ç®—å­  ====================//
 //=== Rat . flt
 template<std::floating_point T> inline double operator+(const Rational& l, const T& r) { return (T)l + r; }
 template<std::floating_point T> inline double operator-(const Rational& l, const T& r) { return (T)l - r; }
@@ -246,6 +246,6 @@ template<std::floating_point T> inline double operator-(const T& l, const Ration
 template<std::floating_point T> inline double operator*(const T& l, const Rational& r) { return l * (T)r; }
 template<std::floating_point T> inline double operator/(const T& l, const Rational& r) { return l / (T)r; }
 
-//====================  Formatter() ƒI[ƒo[ƒ[ƒh  ====================//
+//====================  Formatter() ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰  ====================//
 
 void s3d::Formatter(FormatData& formatData, const Rational& r) { formatData.string.append((String)r); }
