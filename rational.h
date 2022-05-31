@@ -10,7 +10,7 @@ public:
 	//コンストラクタ
 	Rational();
 	Rational(int32 n, int32 d);
-	template <std::integral T>	explicit Rational(T val);
+	template <std::integral T> explicit Rational(T val);
 
 	//getter / setter
 	int32 gnum() const;
